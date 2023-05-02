@@ -1,0 +1,42 @@
+﻿@model IEnumerable<PropertyMaintenance.Modles.Maintenance>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1 style="text-align: center;">Welcome </h1>
+
+<p style="text-align: center;">
+	<a asp-action="Create" class="btn btn-outline-success">Create New Event</a>
+</p>
+<section>
+	<div class="container py-4">
+		@foreach (var item in Model)
+		{
+			<article class="postcard light blue">
+				<a class="postcard__img_link" href="#">
+					<img class="postcard__img" src="data:image/png;base64,@Convert.ToBase64String(item.Image)" alt="Image Title" />
+				</a>
+				<div class="postcard__text t-dark">
+					<h1 class="postcard__title yellow" style="color: black;"><a href="#">@Html.DisplayFor(modelItem => item.EventName)</a></h1>
+					<div class="postcard__subtitle small">
+						<time datetime="item.CreatedDate">
+							<i class="fas fa-calendar-alt mr-2"></i>@Html.DisplayFor(modelItem => item.CreatedDate)
+						</time>
+					</div>
+					<div class="postcard__bar"></div>
+					<div class="postcard__preview-txt">
+						@Html.DisplayFor(modelItem => item.Description)
+					</div>
+					<ul class="postcard__tagbox">
+						<li class="tag__item play yellow">
+							<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a> |
+							<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">Details</a> |
+							<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-warning">Delete</a>
+						</li>
+					</ul>
+				</div>
+			</article>
+		}
+	</div>
+</section>
